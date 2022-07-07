@@ -3,12 +3,13 @@ import java.time.LocalDateTime;
 public class Appointment {
 
     protected String clinicNumber;
-    protected String Status;
+    protected ApointmentStatus Status;
     protected LocalDateTime date;
+
 
     public Appointment(String clinicNumber, String status, LocalDateTime date) {
         this.clinicNumber = clinicNumber;
-        Status = "Not started";
+        Status = ApointmentStatus.NOT_STARTED;
         this.date = date;
     }
 }
