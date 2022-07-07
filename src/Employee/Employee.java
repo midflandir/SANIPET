@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Employee {
+
     protected String DNI;
     protected String name;
     protected String cellphone;
