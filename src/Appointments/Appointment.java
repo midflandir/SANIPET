@@ -4,13 +4,13 @@ public class Appointment {
 
     protected String clinicNumber;
     protected Type type;
-    protected ApointmentStatus Status;
+    protected AppointmentStatus Status;
     protected LocalDateTime date;
 
-    public Appointment(String clinicNumber, Type type, ApointmentStatus status, LocalDateTime date) {
+    public Appointment(String clinicNumber, Type type, AppointmentStatus status, LocalDateTime date) {
         this.clinicNumber = clinicNumber;
         this.type = type;
-        Status = ApointmentStatus.NOT_STARTED;
+        Status = AppointmentStatus.NOT_STARTED;
         this.date = date;
     }
 }

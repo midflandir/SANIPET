@@ -1,6 +1,6 @@
 package Appointments;
 
-public enum ApointmentStatus {
+public enum AppointmentStatus {
 
     NOT_STARTED,
     FINISHED, 

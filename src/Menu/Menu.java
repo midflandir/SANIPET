@@ -3,6 +3,9 @@ import java.util.Scanner;
 public class Menu {
 
 private static Scanner in = new Scanner(System.in);
+
+public static Registerpatient patients = new Registerpatient();
+    public static Appoinments appointments = new Appoinments();
     public static void mainmenu(){
         Integer opcion;
 
@@ -23,9 +26,10 @@ private static Scanner in = new Scanner(System.in);
 
         switch (Option) {
             case 1:
-                Registerpatient.register();
+                patients.register();
                 break;
             case 2:
+                appointments.start();
                 break;
 
         }
