@@ -6,6 +6,10 @@ private static Scanner in = new Scanner(System.in);
 
 public static Registerpatient patients = new Registerpatient();
     public static Appoinments appointments = new Appoinments();
+
+    public static Medicine meds = new Medicine();
+
+    public static Billing bill = new Billing();
     public static void mainmenu(){
         Integer opcion;
 
@@ -31,6 +35,12 @@ public static Registerpatient patients = new Registerpatient();
             case 2:
                 appointments.start();
                 break;
+            case 3:
+                bill.start();
+                break;
+            case 4:
+                meds.start();
+            break ;
 
         }
         if(Option != 5) {
