@@ -2,7 +2,7 @@ package Menu;
 import java.util.Scanner;
 public class Menu {
 
-private static Scanner in;
+private static Scanner in = new Scanner(System.in);
     public static void mainmenu(){
         Integer opcion;
 
@@ -22,12 +22,12 @@ private static Scanner in;
     public static void options(Integer Option){
 
         switch (Option) {
-            case 1: 
+            case 1:
                 Registerpatient.register();
                 break;
             case 2:
                 break;
-                
+
         }
 
     }

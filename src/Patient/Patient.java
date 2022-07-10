@@ -9,7 +9,7 @@ public class Patient {
     protected String breed;
     protected Owner owners;
     protected boolean isVaccinated;
-    protected Date desparasitationDate;
+    protected String desparasitationDate;
 
     protected String generateNumber(){
         return null;
@@ -55,11 +55,11 @@ public class Patient {
         isVaccinated = vaccinated;
     }
 
-    public Date getDesparasitationDate() {
+    public String getDesparasitationDate() {
         return desparasitationDate;
     }
 
-    public void setDesparasitationDate(Date desparasitationDate) {
+    public void setDesparasitationDate(String desparasitationDate) {
         this.desparasitationDate = desparasitationDate;
     }
 }

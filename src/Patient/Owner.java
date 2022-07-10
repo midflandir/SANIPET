@@ -13,6 +13,8 @@ public class Owner {
         this.cellphone = cellphone;
         this.age = age;
     }
+    public Owner() {
+    }
 
     public String getDNI() {
         return DNI;
