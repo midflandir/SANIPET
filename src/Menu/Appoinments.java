@@ -1,8 +1,13 @@
 package Menu;
 
 import Appointments.Appointment;
+import Appointments.AppointmentStatus;
+import Appointments.Type;
+import java.time.LocalDate;
+import java.time.*;
+import java.time.temporal.TemporalAdjusters;
 
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -59,129 +64,123 @@ public class Appoinments {
 
     public static void Createappointment() {
         String aux;
-        int auxb;
-        Dog dogpatient = new Dog();
+        int auxb,auxc;
+        Appointment appoint = new Appointment();
 
-        System.out.println("Please enter the dog's Clinic number");
+        System.out.println("Please enter the patient's Clinic number");
         aux = in.nextLine();
-        dogpatient.setClinicNumber(aux);
+        appoint.setClinicNumber(aux);
 
-        System.out.println("Please enter the dog's name");
-        aux = in.nextLine();
-        dogpatient.setName(aux);
-
-        System.out.println("Please enter the dog's breed");
-        aux = in.nextLine();
-        dogpatient.setBreed(aux);
 
         try {
-            System.out.println("Is the cat Vaccinated 1. Yes 2. No");
+            System.out.println("Please select appoinment type  \n" +
+                    "   1. MEDICAL,\n" +
+                    "   2. SURGERY,\n" +
+                    "   3. AESTHETIC");
             auxb = Integer.parseInt(in.nextLine());
             if (auxb == 1) {
-                dogpatient.setVaccinated(true);
+                appoint.setType(Type.MEDICAL);
+
             }
             if (auxb == 2) {
-                dogpatient.setVaccinated(false);
+                appoint.setType(Type.SURGERY);
             }
-            if (auxb != 1 || auxb != 2) {
+            if (auxb == 3) {
+                appoint.setType(Type.AESTHETIC);
+            }
+            if (auxb != 1 && auxb != 2 && auxb != 3) {
                 System.out.println("invalid option");
             }
         } catch (Exception e) {
             System.out.println("invalid option");
         }
 
-        System.out.println("Please Enter desparasitation Date");
-        aux = in.nextLine();
-        dogpatient.setDesparasitationDate(aux);
 
+        appoint.setStatus(AppointmentStatus.NOT_STARTED);
 
-        dogpatient.setOwners(registerwoner());
+        System.out.println("Please enter a Day\n" +
+                "       1.  MONDAY\n" +
+                "       2.  TUESDAY\n" +
+                "       3.  WEDNESDAY\n" +
+                "       4.  THURSDAY\n" +
+                "       5.  FRIDAY\n" +
+                "       6.  SATURDAY");
+        auxb = Integer.parseInt(in.nextLine());
 
-        dogs.add(dogpatient);
+        LocalDate ld = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth());
+        System.out.println(ld);
+        ld = ld.with(TemporalAdjusters.nextOrSame(DayOfWeek.of(auxb)));
+
+        if (auxb >= 1 && auxb <= 5) {
+            System.out.println("Please enter an hour between 8 and 19");
+            auxb = Integer.parseInt(in.nextLine());
+        }
+
+        if (auxb == 6) {
+            System.out.println("Please enter an hour between 9 and 15");
+            auxb = Integer.parseInt(in.nextLine());
+        }
+
+        LocalDateTime ldt = LocalDateTime.of(ld.getYear(), ld.getMonth(), ld.getDayOfMonth(), auxb, 00);
+
+        appoint.setDate(ldt);
+
+        appointmentss.add(appoint);
     }
 
 
     public static void Updateppointment() {
-        Owner catowner = new Owner();
-        String aux;
 
-        System.out.println("Please enter owner DNI");
-        aux = in.nextLine();
-        catowner.setDNI(aux);
-
-        System.out.println("Please enter the owner's name");
-        aux = in.nextLine();
-        catowner.setName(aux);
-
-        System.out.println("Please enter the owner's cellphone");
-        aux = in.nextLine();
-        catowner.setCellphone(aux);
-
-        try {
-            System.out.println("Please enter the owner's age");
-            aux = in.nextLine();
-            catowner.setAge(Integer.parseInt(aux));
-        } catch (Exception e) {
-            System.out.println("Error - invalid age");
-        }
-
-        return catowner;
     }
 
 
     public static void Cancelappointment() {
-        Owner catowner = new Owner();
+
+
         String aux;
+        int auxb,auxc;
+        System.out.println("Please enter the Day of the Appoinment to be cancelled \n" +
+                "       1.  MONDAY\n" +
+                "       2.  TUESDAY\n" +
+                "       3.  WEDNESDAY\n" +
+                "       4.  THURSDAY\n" +
+                "       5.  FRIDAY\n" +
+                "       6.  SATURDAY");
+        auxb = Integer.parseInt(in.nextLine());
 
-        System.out.println("Please enter owner DNI");
-        aux = in.nextLine();
-        catowner.setDNI(aux);
+        System.out.println("Please enter the hour of the Appoinment to be cancelled ");
+        auxc = Integer.parseInt(in.nextLine());
 
-        System.out.println("Please enter the owner's name");
-        aux = in.nextLine();
-        catowner.setName(aux);
-
-        System.out.println("Please enter the owner's cellphone");
-        aux = in.nextLine();
-        catowner.setCellphone(aux);
-
-        try {
-            System.out.println("Please enter the owner's age");
-            aux = in.nextLine();
-            catowner.setAge(Integer.parseInt(aux));
-        } catch (Exception e) {
-            System.out.println("Error - invalid age");
+        for( int i = 0 ; i < appointmentss.size() ; i++ ) { // start from index 0
+            if (appointmentss.get(i).getDate().getDayOfWeek() == DayOfWeek.of(auxb) && appointmentss.get(i).getDate().getHour() == auxc) {
+                appointmentss.get(i).setStatus(AppointmentStatus.CANCELED);
+                System.out.println( " Appointments Cancelled");
+            }
         }
 
-        return catowner;
     }
 
 
     public static void FilterAppointment() {
-        Owner catowner = new Owner();
+
         String aux;
+        int auxb,auxc;
+        System.out.println("Please enter a Day to filter\n" +
+                "       1.  MONDAY\n" +
+                "       2.  TUESDAY\n" +
+                "       3.  WEDNESDAY\n" +
+                "       4.  THURSDAY\n" +
+                "       5.  FRIDAY\n" +
+                "       6.  SATURDAY");
+        auxb = Integer.parseInt(in.nextLine());
 
-        System.out.println("Please enter owner DNI");
-        aux = in.nextLine();
-        catowner.setDNI(aux);
-
-        System.out.println("Please enter the owner's name");
-        aux = in.nextLine();
-        catowner.setName(aux);
-
-        System.out.println("Please enter the owner's cellphone");
-        aux = in.nextLine();
-        catowner.setCellphone(aux);
-
-        try {
-            System.out.println("Please enter the owner's age");
-            aux = in.nextLine();
-            catowner.setAge(Integer.parseInt(aux));
-        } catch (Exception e) {
-            System.out.println("Error - invalid age");
+        for( int i = 0 ; i < appointmentss.size() ; i++ ) { // start from index 0
+            if (appointmentss.get(i).getDate().getDayOfWeek() == DayOfWeek.of(auxb)) {
+                System.out.println( " Appointments for the day " + appointmentss.get(i).getDate().getDayOfWeek() +
+                        "  a this hour" + appointmentss.get(i).getDate().getHour());
+            }
         }
 
-        return catowner;
     }
 
 

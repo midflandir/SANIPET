@@ -33,7 +33,9 @@ public static Registerpatient patients = new Registerpatient();
                 break;
 
         }
-
+        if(Option != 5) {
+            mainmenu();
+        }
     }
 
 
